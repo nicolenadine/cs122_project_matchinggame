@@ -1,0 +1,38 @@
+# Python compiled files
+*.pyc
+*.pyo
+__pycache__/
+*.pyd
+
+# Environment / Virtual Environment files
+venv/
+.venv/
+env/
+.env
+.env.*
+
+# macOS files
+.DS_Store
+
+# Log files
+*.log
+logs/
+*.out
+*.err
+
+# PyCharm files
+.idea/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Temporary Files
+*.tmp
+*.bak
