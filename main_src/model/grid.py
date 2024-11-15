@@ -13,7 +13,6 @@ class Grid:
         self.image = image
         self.generate_tiles()
 
-
     def generate_tiles(self):
         num_pairs = (GRID_SIZE * GRID_SIZE) // 2
         tile_types = [i for i in range(num_pairs)] * 2
@@ -31,8 +30,17 @@ class Grid:
                 x = self.PADDING_WIDTH + self.LEFT_MARGIN + col * TILE_SIZE  #
                 # Adjust x position for padding and margin
                 y = row * TILE_SIZE
-                row_tiles.append(Tile(tile_type, color_map[tile_type], x, y,
-                                      self.image),)
+                # Try to create the Tile instance
+                try:
+                    tile = Tile(tile_type, color_map[tile_type], x, y,
+                                self.image)
+                except Exception as e:
+                    raise RuntimeError(
+                        f"Failed to create Tile with type {tile_type} at position ({x}, {y}): {e}")
+
+                # Append the successfully created tile to the row
+                row_tiles.append(tile)
+
             self.tiles.append(row_tiles)
 
     def draw(self, screen):

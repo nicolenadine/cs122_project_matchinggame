@@ -6,7 +6,17 @@ from model.grid import Grid
 
 class GridController:
     def __init__(self, image):
-        self.grid = Grid(PADDING_WIDTH, LEFT_MARGIN, image)
+        # Ensure image is an instance of suface
+        if image is None:
+            print(
+                "Warning: No valid image provided, using a placeholder surface.")
+            # Create a default/fallback surface (e.g., a blank tile)
+            self.image = pygame.Surface((TILE_SIZE // 2, TILE_SIZE // 2))
+            self.image.fill((255, 255,
+                             255))  # Placeholder color
+        else:
+            self.image = image
+        self.grid = Grid(PADDING_WIDTH, LEFT_MARGIN, self.image)
 
     def handle_click(self, pos):
         # Adjust click position by subtracting the padding and margin
