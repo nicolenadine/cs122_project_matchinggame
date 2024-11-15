@@ -1,10 +1,10 @@
 import pygame
 import time
 from view.ui import display_timers, \
-    display_end_message  # Import utility functions if needed
+    display_end_message
 from controller.grid_controller import GridController
-from model.settings import SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND_COLOR, \
-    PADDING_WIDTH, LEFT_MARGIN, TIME_LIMIT, MOVE_LIMIT, get_image
+from model.settings import (BACKGROUND_COLOR, PADDING_WIDTH, LEFT_MARGIN,
+                            TIME_LIMIT, MOVE_LIMIT, get_image)
 
 
 class GameState:
@@ -14,6 +14,9 @@ class GameState:
         self.grid_controller = GridController(image=get_image())  # Initialize
         # game elements
         self.start_time = time.time()
+        self.time_remaining = TIME_LIMIT
+        self.moves = 0
+        self.moves_remaining = MOVE_LIMIT
         self.result = None
 
     def handle_events(self):
@@ -27,12 +30,13 @@ class GameState:
                         event.pos[0] - PADDING_WIDTH - LEFT_MARGIN,
                         event.pos[1])
                     self.grid_controller.handle_click(adjusted_pos)
+                    self.grid_controller.process_tile_selection()  # Moved matching logic here
 
     def update(self):
         time_elapsed = time.time() - self.start_time
         self.time_remaining = max(TIME_LIMIT - time_elapsed,
                                   0) if TIME_LIMIT else None
-        self.moves_remaining = max(MOVE_LIMIT - self.grid_controller.grid.moves,
+        self.moves_remaining = max(MOVE_LIMIT - self.moves,
                                    0) if MOVE_LIMIT else None
 
         # Check for win or loss

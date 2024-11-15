@@ -16,7 +16,10 @@
     <list default="true" id="f508975f-f016-4a1c-9768-a52164802274" name="Changes" comment="Changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_src/controller/grid_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_src/controller/grid_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_src/images/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_src/assets/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_src/model/grid.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_src/model/grid.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_src/model/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_src/model/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_src/view/game_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_src/view/game_state.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +110,15 @@
       <workItem from="1731362767148" duration="487000" />
       <workItem from="1731432804389" duration="5777000" />
     </task>
+    <task id="LOCAL-00001" summary="Changes">
+      <option name="closed" value="true" />
+      <created>1731713177926</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731713177926</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,5 +134,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes" />
   </component>
 </project>

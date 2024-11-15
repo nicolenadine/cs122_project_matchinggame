@@ -6,7 +6,6 @@ PADDING_WIDTH = 200  # Width of the left padding for timers
 LEFT_MARGIN = 20  # Margin between left padding and game grid
 SCREEN_WIDTH, SCREEN_HEIGHT = PADDING_WIDTH + LEFT_MARGIN + 800, 800  # Adjusted width
 GRID_SIZE = 6  # Increased grid size
-TILE_SIZE = (SCREEN_WIDTH - PADDING_WIDTH - LEFT_MARGIN) // GRID_SIZE  # Adjust tile size for the adjusted screen width
 BORDER_WIDTH = 2  # Thickness of the border around each tile
 TILE_SIZE = (SCREEN_WIDTH - PADDING_WIDTH - LEFT_MARGIN) // GRID_SIZE - 2 * BORDER_WIDTH  # Adjust tile size for the border
 
@@ -31,7 +30,7 @@ def get_font():
 # Load Images
 def get_image():
     main_src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    image_path = os.path.join(main_src_path, 'images', 'image.png')
+    image_path = os.path.join(main_src_path, 'assets', 'image.png')
     print(f"Loading image from: {image_path}")
 
     try:
@@ -45,7 +44,6 @@ def get_image():
     # Check if the image loaded successfully
     if not isinstance(image, pygame.Surface):
         print("Error: Loaded image is not a valid pygame.Surface object")
-        return None  # Return None or handle it as needed
+        return None
 
-    # Transform the image if needed
     return pygame.transform.scale(image, (TILE_SIZE // 2, TILE_SIZE // 2))

@@ -7,7 +7,6 @@ class Grid:
     def __init__(self, padding_width, left_margin, image):
         self.tiles = []
         self.revealed_tiles = []
-        self.moves = 0
         self.PADDING_WIDTH = padding_width
         self.LEFT_MARGIN = left_margin
         self.image = image
