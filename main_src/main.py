@@ -1,6 +1,7 @@
 import pygame
 from controller.state_controller import StateController
 from controller.menu_state import MenuState
+from model.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 def main():
@@ -8,7 +9,7 @@ def main():
     # FONT = get_font()
 
     # Show the instructions screen
-    screen = pygame.display.set_mode((800, 600))
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Memory Match Game")
 
     # Initialize the state controller with the initial state (menu)

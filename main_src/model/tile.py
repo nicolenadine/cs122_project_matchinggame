@@ -1,7 +1,5 @@
 import pygame
-from model.settings import TILE_SIZE, HIDDEN_TILE_COLOR, BORDER_COLOR, \
-    BORDER_WIDTH, get_image
-
+from model.settings import TILE_SIZE, HIDDEN_TILE_COLOR, BORDER_COLOR, BORDER_WIDTH
 
 class Tile:
     def __init__(self, tile_type, color, x, y, image):
@@ -20,6 +18,7 @@ class Tile:
             self.draw_hidden(screen)
 
     def draw_hidden(self, screen):
+        # Draw the hidden state with a border
         pygame.draw.rect(screen, HIDDEN_TILE_COLOR,
                          (self.x, self.y, TILE_SIZE, TILE_SIZE))
 
@@ -28,7 +27,7 @@ class Tile:
                          (self.x, self.y, TILE_SIZE, TILE_SIZE), BORDER_WIDTH)
 
     def draw_revealed(self, screen):
-        # Draw the background color
+        # Draw the revealed state with the background color
         pygame.draw.rect(screen, self.color,
                          (self.x, self.y, TILE_SIZE, TILE_SIZE))
 
@@ -36,7 +35,7 @@ class Tile:
         pygame.draw.rect(screen, BORDER_COLOR,
                          (self.x, self.y, TILE_SIZE, TILE_SIZE), BORDER_WIDTH)
 
-        # Center the Pikachu image on the tile
+        # Center the image on the tile
         image_rect = self.flipped_image.get_rect(
             center=(self.x + TILE_SIZE // 2, self.y + TILE_SIZE // 2))
         screen.blit(self.flipped_image, image_rect)

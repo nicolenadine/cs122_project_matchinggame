@@ -1,23 +1,32 @@
 import pygame
-from model.settings import get_font, TIME_LIMIT, MOVE_LIMIT, PADDING_COLOR, \
-    PADDING_WIDTH, SCREEN_HEIGHT
+from model.settings import get_font, TIME_LIMIT, MOVE_LIMIT, SCREEN_WIDTH, \
+    STATS_AREA_HEIGHT, PADDING_COLOR
 
 
 def display_timers(screen, time_remaining, moves_remaining):
-    """ Display the countdown timers in the padding area. """
-    # Draw background for the padding area
+    """ Display the countdown timers in the stats area at the top of the screen. """
+    # Draw background for the stats area
     pygame.draw.rect(screen, PADDING_COLOR,
-                     (0, 0, PADDING_WIDTH, SCREEN_HEIGHT))
+                     (0, 0, SCREEN_WIDTH, STATS_AREA_HEIGHT))
 
-    # Display the time limit countdown
+    # Display the time limit countdown (left-aligned)
     time_text = f"Time Left: {int(time_remaining)}s" if time_remaining > 0 else "Time's Up!"
     time_surface = get_font().render(time_text, True, (0, 0, 0))
-    screen.blit(time_surface, (20, 100))
+    screen.blit(time_surface,
+                (20, 20))  # Position near the top-left corner of the stats area
 
-    # Display the move limit countdown
+    # Display the moves remaining (center-aligned)
     move_text = f"Moves Left: {moves_remaining}" if moves_remaining > 0 else "No Moves Left!"
     move_surface = get_font().render(move_text, True, (0, 0, 0))
-    screen.blit(move_surface, (20, 150))
+    screen.blit(move_surface, ((SCREEN_WIDTH - move_surface.get_width()) // 2,
+                               20))  # Centered horizontally
+
+    # Display the move limit (right-aligned)
+    move_limit_text = f"Total Moves: {MOVE_LIMIT}"
+    move_limit_surface = get_font().render(move_limit_text, True, (0, 0, 0))
+    screen.blit(move_limit_surface, (
+        SCREEN_WIDTH - move_limit_surface.get_width() - 20,
+        20))  # Positioned near the top-right corner
 
 
 def display_message(screen, message, color, position):
@@ -32,7 +41,8 @@ def display_end_message(screen, result):
     else:
         message = "Game Over!"
         color = (255, 0, 0)
-    display_message(screen, message, color, (200, 300))
+    display_message(screen, message, color, (SCREEN_WIDTH // 2 - 100,
+                                             STATS_AREA_HEIGHT + 100))  # Centered below the stats area
 
 
 def show_instructions():
@@ -74,5 +84,3 @@ def show_instructions():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if button_rect.collidepoint(event.pos):
                     waiting = False  # Exit the loop to transition to the game
-
-#   pygame.display.quit()

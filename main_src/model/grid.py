@@ -1,14 +1,13 @@
 import random
 from model.tile import Tile
-from model.settings import GRID_SIZE, TILE_SIZE
+from model.settings import GRID_SIZE, TILE_SIZE, BORDER_WIDTH, \
+    STATS_AREA_HEIGHT, TILE_TOTAL_SIZE, WHITESPACE
 
 
 class Grid:
-    def __init__(self, padding_width, left_margin, image):
+    def __init__(self, image):
         self.tiles = []
         self.revealed_tiles = []
-        self.PADDING_WIDTH = padding_width
-        self.LEFT_MARGIN = left_margin
         self.image = image
         self.generate_tiles()
 
@@ -20,22 +19,22 @@ class Grid:
         # Generate unique colors for each pair
         unique_colors = [(random.randint(0, 255), random.randint(0, 255),
                           random.randint(0, 255)) for _ in range(num_pairs)]
-        color_map = {tile_type: unique_colors[tile_type] for tile_type in
-                     range(num_pairs)}
+        color_map = {tile_type: unique_colors[tile_type] for tile_type in range(num_pairs)}
+
         for row in range(GRID_SIZE):
             row_tiles = []
             for col in range(GRID_SIZE):
                 tile_type = tile_types.pop()
-                x = self.PADDING_WIDTH + self.LEFT_MARGIN + col * TILE_SIZE  #
-                # Adjust x position for padding and margin
-                y = row * TILE_SIZE
+
+                # Calculate tile position using TILE_TOTAL_SIZE
+                x = WHITESPACE + col * TILE_TOTAL_SIZE
+                y = WHITESPACE + row * TILE_TOTAL_SIZE + STATS_AREA_HEIGHT
+
                 # Try to create the Tile instance
                 try:
-                    tile = Tile(tile_type, color_map[tile_type], x, y,
-                                self.image)
+                    tile = Tile(tile_type, color_map[tile_type], x, y, self.image)
                 except Exception as e:
-                    raise RuntimeError(
-                        f"Failed to create Tile with type {tile_type} at position ({x}, {y}): {e}")
+                    raise RuntimeError(f"Failed to create Tile with type {tile_type} at position ({x}, {y}): {e}")
 
                 # Append the successfully created tile to the row
                 row_tiles.append(tile)
