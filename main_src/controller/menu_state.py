@@ -1,5 +1,5 @@
 import pygame
-from view.game_state import GameState  # Import GameState to transition
+from controller.game_state import GameState  # Import GameState to transition
 
 
 class MenuState:
@@ -21,7 +21,6 @@ class MenuState:
                     self.game_controller.change_state(new_state)
 
     def update(self):
-        # Any menu update logic goes here (if needed)
         pass
 
     def render(self, screen):

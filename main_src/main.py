@@ -1,6 +1,6 @@
 import pygame
 from controller.state_controller import StateController
-from view.menu_state import MenuState
+from controller.menu_state import MenuState
 
 
 def main():
