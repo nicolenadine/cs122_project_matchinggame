@@ -3,7 +3,7 @@ from model.settings import get_font, TIME_LIMIT, MOVE_LIMIT, SCREEN_WIDTH, \
     STATS_AREA_HEIGHT, PADDING_COLOR
 
 
-def display_timers(screen, time_remaining, moves_remaining):
+def display_timers(screen, time_remaining, moves_remaining, moves_taken):
     """ Display the countdown timers in the stats area at the top of the screen. """
     # Draw background for the stats area
     pygame.draw.rect(screen, PADDING_COLOR,
@@ -22,7 +22,7 @@ def display_timers(screen, time_remaining, moves_remaining):
                                20))  # Centered horizontally
 
     # Display the move limit (right-aligned)
-    move_limit_text = f"Total Moves: {MOVE_LIMIT}"
+    move_limit_text = f"Total Moves: {moves_taken}"
     move_limit_surface = get_font().render(move_limit_text, True, (0, 0, 0))
     screen.blit(move_limit_surface, (
         SCREEN_WIDTH - move_limit_surface.get_width() - 20,

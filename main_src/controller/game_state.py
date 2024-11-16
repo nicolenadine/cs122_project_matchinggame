@@ -53,7 +53,8 @@ class GameState:
     def render(self, screen):
         screen.fill(BACKGROUND_COLOR)
         self.grid_controller.draw(screen)  # Draw the grid
-        display_timers(screen, self.time_remaining, self.moves_remaining)  # Display stats
+        display_timers(screen, self.time_remaining, self.moves_remaining,
+                       self.moves)  # Display stats
 
         # If game over, display the result
         if self.result:
