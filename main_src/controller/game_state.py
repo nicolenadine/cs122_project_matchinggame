@@ -9,12 +9,15 @@ class GameState:
     def __init__(self, game_controller):
         self.game_controller = game_controller
         self.game_running = True
-        self.grid_controller = GridController(image=get_image())  # Initialize grid controller
         self.start_time = time.time()
         self.time_remaining = TIME_LIMIT
         self.moves = 0
         self.moves_remaining = MOVE_LIMIT
         self.result = None
+
+        # Initialize grid controller & call-back function for incrementing moves
+        self.grid_controller = GridController(image=get_image())
+        self.grid_controller.move_callback = self.increment_moves
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -28,12 +31,13 @@ class GameState:
                     )
                     if adjusted_pos[1] >= 0:  # Ensure click is below the stats area
                         self.grid_controller.handle_click(adjusted_pos)
-                        self.grid_controller.process_tile_selection()  # Handle tile matching logic
+            elif event.type == pygame.USEREVENT:
+                # Handle the delayed flip-back event
+                self.grid_controller.handle_timer_event()
 
     def update(self):
         time_elapsed = time.time() - self.start_time
         self.time_remaining = max(TIME_LIMIT - time_elapsed, 0) if TIME_LIMIT else None
-        self.moves_remaining = max(MOVE_LIMIT - self.moves, 0) if MOVE_LIMIT else None
 
         # Check for win or loss
         if self.grid_controller.all_matched():
@@ -56,3 +60,8 @@ class GameState:
             display_end_message(screen, self.result)
 
         pygame.display.flip()
+
+    def increment_moves(self):
+        self.moves += 1
+        self.moves_remaining = max(MOVE_LIMIT - self.moves, 0)
+
