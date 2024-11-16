@@ -29,7 +29,7 @@ class GridController:
                 tile.flipped = True
                 self.grid.revealed_tiles.append(tile)
 
-                # Check for match only if we're not already waiting for a match
+                # Check for match only if two new tiles have been selected
                 if len(self.grid.revealed_tiles) == 2:
                     self.process_tile_selection()
 
