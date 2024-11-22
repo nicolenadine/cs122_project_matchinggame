@@ -2,13 +2,15 @@ import pygame
 import time
 from view.ui import display_timers, display_end_message
 from controller.grid_controller import GridController
-from model.settings import (BACKGROUND_COLOR, TIME_LIMIT, MOVE_LIMIT, get_image, STATS_AREA_HEIGHT)
-
+from model.settings import (BACKGROUND_COLOR, TIME_LIMIT, MOVE_LIMIT, get_theme,
+                            STATS_AREA_HEIGHT, SCREEN_HEIGHT, SCREEN_WIDTH)
+from model.scorekeeper import ScoreKeeper
 
 class GameState:
-    def __init__(self, game_controller):
+    def __init__(self, game_controller, theme):
         self.game_controller = game_controller
         self.game_running = True
+        self.score_keeper = ScoreKeeper()
         self.start_time = time.time()
         self.time_remaining = TIME_LIMIT
         self.moves = 0
@@ -16,7 +18,7 @@ class GameState:
         self.result = None
 
         # Initialize grid controller & call-back function for incrementing moves
-        self.grid_controller = GridController(image=get_image())
+        self.grid_controller = GridController(image=get_theme(theme))
         self.grid_controller.move_callback = self.increment_moves
 
     def handle_events(self):
@@ -43,23 +45,56 @@ class GameState:
         if self.grid_controller.all_matched():
             self.result = "win"
             self.game_running = False  # Stop the game loop
+            self.score_keeper.update_scores(time_elapsed, self.moves)
         elif TIME_LIMIT and self.time_remaining <= 0:
             self.result = "lose"
             self.game_running = False  # Stop the game loop
+            self.score_keeper.update_scores(time_elapsed, self.moves)
         elif MOVE_LIMIT and self.moves_remaining <= 0:
             self.result = "lose"
             self.game_running = False  # Stop the game loop
+            self.score_keeper.update_scores(time_elapsed, self.moves)
 
     def render(self, screen):
+        # Clear the screen and draw the background
         screen.fill(BACKGROUND_COLOR)
-        self.grid_controller.draw(screen)  # Draw the grid
-        display_timers(screen, self.time_remaining, self.moves_remaining,
-                       self.moves)  # Display stats
 
-        # If game over, display the result
+        # Draw the grid
+        self.grid_controller.draw(screen)
+
+        # Display the timers and stats at the top
+        display_timers(screen, self.time_remaining, self.moves_remaining,
+                       self.moves)
+
+        # Display the scorekeeper stats at the bottom
+        if self.score_keeper:  # Check if score_keeper is initialized
+            font = pygame.font.Font(None, 36)
+            best_time_text = (
+                f"Best Time: {self.score_keeper.best_time:.2f} seconds"
+                if self.score_keeper.best_time is not None else
+                "Best Time: N/A"
+            )
+            total_moves_text = (
+                f"Least Moves: {self.score_keeper.total_moves}"
+                if self.score_keeper.total_moves is not None else
+                "Least Moves: N/A"
+            )
+
+            # Render the text for best time
+            best_time_surface = font.render(best_time_text, True, (0, 0, 0))
+            screen.blit(best_time_surface, (20,
+                                            SCREEN_HEIGHT - 50))  # Adjust Y-position for the bottom of the screen
+
+            # Render the text for least moves
+            total_moves_surface = font.render(total_moves_text, True, (0, 0, 0))
+            screen.blit(total_moves_surface,
+                        (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 50))
+
+        # If the game is over, display the result
         if self.result:
             display_end_message(screen, self.result)
 
+        # Update the display
         pygame.display.flip()
 
     def increment_moves(self):

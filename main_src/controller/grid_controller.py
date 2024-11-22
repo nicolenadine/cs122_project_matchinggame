@@ -1,7 +1,7 @@
 import pygame
 from model.settings import FLIP_DURATION, GRID_SIZE, TILE_SIZE, BORDER_WIDTH, \
     STATS_AREA_HEIGHT
-from model.grid import Grid
+from view.grid import Grid
 
 
 class GridController:

@@ -1,7 +1,6 @@
 import random
-from model.tile import Tile
-from model.settings import GRID_SIZE, TILE_SIZE, BORDER_WIDTH, \
-    STATS_AREA_HEIGHT, TILE_TOTAL_SIZE, WHITESPACE
+from view.tile import Tile
+from model.settings import GRID_SIZE, STATS_AREA_HEIGHT, TILE_TOTAL_SIZE, WHITESPACE
 
 
 class Grid:

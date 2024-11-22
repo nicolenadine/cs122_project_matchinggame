@@ -1,5 +1,6 @@
 import pygame
-from model.settings import TILE_SIZE, HIDDEN_TILE_COLOR, BORDER_COLOR, BORDER_WIDTH
+from model.settings import (TILE_SIZE, get_hidden_tile_color, BORDER_COLOR,
+                            BORDER_WIDTH)
 
 class Tile:
     def __init__(self, tile_type, color, x, y, image):
@@ -19,7 +20,7 @@ class Tile:
 
     def draw_hidden(self, screen):
         # Draw the hidden state with a border
-        pygame.draw.rect(screen, HIDDEN_TILE_COLOR,
+        pygame.draw.rect(screen, get_hidden_tile_color(),
                          (self.x, self.y, TILE_SIZE, TILE_SIZE))
 
         # Draw the border around the tile
