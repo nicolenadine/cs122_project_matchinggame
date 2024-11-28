@@ -1,0 +1,4 @@
+name,image_file_name,primary_color,hidden_tile_color
+pikachu,pikachu.png,255-220-0,255-230-102
+squirtle,squirtle.png,0-190-255,103-222-229
+gengar,gengar.png,128-0-128,153-50-204
