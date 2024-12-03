@@ -1,4 +1,8 @@
 class BaseState:
+    """
+    Parent for controller classes. All state controllers should implement a run
+    method.
+    """
     def __init__(self, controller):
         self.controller = controller
 

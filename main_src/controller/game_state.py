@@ -7,6 +7,11 @@ from model.settings import BACKGROUND_COLOR, TIME_LIMIT, MOVE_LIMIT, get_theme
 
 
 class GameState(BaseState):
+    """
+    This controller class inherits from BaseState Class and must implement
+    run method. The GameState class controls the screen and game behavior
+    components until current game ends or user exits.
+    """
     def __init__(self, controller, theme):
         super().__init__(controller)
         self.theme = theme
@@ -70,6 +75,7 @@ class GameState(BaseState):
     def render(self, screen):
         """
         Render the game screen.
+        :param screen
         """
         screen.fill(BACKGROUND_COLOR)
 
@@ -89,6 +95,7 @@ class GameState(BaseState):
     def run(self, screen):
         """
         Main loop for the game state.
+        :param screen
         """
         while True:
             next_action = self.handle_events()

@@ -1,5 +1,12 @@
 from model.scorekeeper import ScoreKeeper
+
+
 class StateController:
+    """
+    The StateController class manages the instantiation of and transitions
+    between other controller instances. It also retrieves, maintains, and passes along
+    attributes required for initializing states.
+    """
     def __init__(self, initial_state):
         self.current_state = initial_state
         self.score_keeper = ScoreKeeper()  # Shared ScoreKeeper instance

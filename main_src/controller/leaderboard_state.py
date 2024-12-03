@@ -4,6 +4,12 @@ from model.settings import BACKGROUND_COLOR, SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class LeaderboardState(BaseState):
+    """
+    This controller class inherits from BaseState Class and must implement
+    run method. The LeaderboardState class controls the screen and behavior
+    components for the leaderboard window that displays current game score
+    and top scores.
+    """
     def __init__(self, controller, result, time_elapsed, moves):
         super().__init__(controller)
         self.result = result
@@ -30,7 +36,7 @@ class LeaderboardState(BaseState):
     def update(self):
         """
         Update method for LeaderboardState.
-        Since there's no ongoing logic, simply return the current state.
+        Since there's no ongoing logic, return the current state.
         """
         return "LEADERBOARD"
 
@@ -78,6 +84,7 @@ class LeaderboardState(BaseState):
     def run(self, screen):
         """
         Main loop for the leaderboard state.
+        :param screen
         """
         while True:
             next_action = self.handle_events()

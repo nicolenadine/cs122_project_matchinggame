@@ -3,6 +3,11 @@ import os
 
 
 class ScoreKeeper:
+    """
+    The ScoreKeeper class manages the loading, updating, and saving of game
+    scores. It works with a json file and only keeps the top scores in order to
+    keep file size minimal.
+    """
     def __init__(self, file_path="score_data.json"):
         self.file_path = file_path
         self.current_game = None  # Stats for the current game

@@ -4,6 +4,10 @@ from model.settings import GRID_SIZE, STATS_AREA_HEIGHT, TILE_TOTAL_SIZE, WHITES
 
 
 class Grid:
+    """
+    The Grid class is responsible for generating tiles and drawing them on
+    the screen. It also checks to see if all tiles are currently matched.
+    """
     def __init__(self, image):
         self.tiles = []
         self.revealed_tiles = []
@@ -11,6 +15,9 @@ class Grid:
         self.generate_tiles()
 
     def generate_tiles(self):
+        """
+        Creates pairs of tiles  and assigns each pair a unique color
+        """
         num_pairs = (GRID_SIZE * GRID_SIZE) // 2
         tile_types = [i for i in range(num_pairs)] * 2
         random.shuffle(tile_types)
@@ -41,9 +48,17 @@ class Grid:
             self.tiles.append(row_tiles)
 
     def draw(self, screen):
+        """
+        Calls for tiles to be drawn to screen
+        :param screen:
+        """
         for row in self.tiles:
             for tile in row:
                 tile.draw(screen)
 
     def all_matched(self):
+        """
+        Check if all pairs of tiles have been matched
+        :return: Boolean
+        """
         return all(tile.matched for row in self.tiles for tile in row)

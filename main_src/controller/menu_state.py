@@ -5,6 +5,12 @@ from model.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class MenuState(BaseState):
+    """
+    This controller class inherits from BaseState Class and must implement
+    run method. The MenuState class controls the menu screen which is
+    displayed to the user before starting a new game. The main menu is where
+    a user selects a theme.
+    """
     def __init__(self, controller):
         super().__init__(controller)
         self.selected_theme = None  # No theme selected by default
@@ -96,6 +102,7 @@ class MenuState(BaseState):
     def run(self, screen):
         """
         Main loop for the menu state.
+        :param screen
         """
         while True:
             # Handle events and check for state transition

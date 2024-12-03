@@ -4,6 +4,9 @@ from model.settings import get_font, TIME_LIMIT, MOVE_LIMIT, SCREEN_WIDTH, \
 
 
 def display_timers(screen, time_remaining, moves_remaining, moves_taken):
+    """
+    Draws the timer display on the screen
+    """
     """ Display the countdown timers in the stats area at the top of the screen. """
     # Draw background for the stats area
     pygame.draw.rect(screen, PADDING_COLOR,
@@ -30,11 +33,18 @@ def display_timers(screen, time_remaining, moves_remaining, moves_taken):
 
 
 def display_message(screen, message, color, position):
+    """
+    Retrieves game font and displays the message onto the screen in the
+    specified color and position.
+    """
     text_surface = get_font().render(message, True, color)
     screen.blit(text_surface, position)
 
 
 def display_end_message(screen, result):
+    """
+    Display result (win/loss) on the screen
+    """
     if result == "win":
         message = "You Win!"
         color = (0, 255, 0)
@@ -46,6 +56,9 @@ def display_end_message(screen, result):
 
 
 def show_instructions():
+    """
+    Display game instructions on the screen
+    """
     # Create an instructions window with game rules
     pygame.display.set_caption("Game Instructions")
     instruction_screen = pygame.display.set_mode((600, 600))

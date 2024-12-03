@@ -32,12 +32,21 @@ THEMES_CSV_PATH = os.path.join(os.path.dirname(__file__), "themes.csv")
 
 
 def get_font():
+    """
+    Allows a consistent font to be used throughout. Implemented as a method
+    to handle instances where font needs to be loaded at specific points for
+    proper rendering
+    :return: pygame font
+    """
     if not pygame.font.get_init():
         pygame.font.init()
     return pygame.font.Font(None, 36)
 
 
 def get_hidden_tile_color():
+    """
+    :return tuple containing RGB values
+    """
     return _hidden_tile_color
 
 
