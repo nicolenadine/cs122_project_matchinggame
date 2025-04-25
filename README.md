@@ -61,7 +61,7 @@ The game uses a state machine to manage different screens:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/pokemon-memory-match.git
+   git clone https://github.com/nicolenadine/cs122_project_matchinggame.git
    cd pokemon-memory-match
    ```
 
